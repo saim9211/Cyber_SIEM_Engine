@@ -7,22 +7,8 @@ print("🚀 Initializing Cyber Security Data Generator Engine...")
 
 # 1. Connect to SQLite Database (It will automatically create the file)
 conn = sqlite3.connect("cyber_logs.db")
-cursor = conn.cursor()
 
-# 2. Create the SQL Table Schema
-cursor.execute("""
-    CREATE TABLE IF NOT EXISTS network_logs (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        timestamp TEXT,
-        protocol_type TEXT,
-        packet_size_bytes INTEGER,
-        login_attempts INTEGER,
-        is_attack INTEGER
-    )
-""")
-conn.commit()
-
-# 3. Generate Mock Data Arrays using NumPy
+# 2. Generate Mock Data Arrays using NumPy
 np.random.seed(42)
 total_rows = 1500
 

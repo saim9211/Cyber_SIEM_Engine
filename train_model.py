@@ -20,8 +20,9 @@ conn.close()
 print(f"📊 Extracted {df.shape[0]} rows successfully. Initializing Feature Split...")
 
 # 2. Separate Features (X) and Target (y)
-# We drop 'id' and 'timestamp' because they are just index logs, not patterns for ML
-X = df.drop(columns=['timestamp', 'is_attack'])
+# Drop non-feature columns safely whether or not an 'id' exists in the table
+drop_cols = [col for col in ['id', 'timestamp', 'is_attack'] if col in df.columns]
+X = df.drop(columns=drop_cols)
 y = df['is_attack']
 
 # 3. The Great Wall: Split into Train and Test sets instantly to prevent Data Leakage
